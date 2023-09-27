@@ -1,0 +1,8 @@
+#!/bin/bash
+read -p "Enter the name of the file to give execution permission: " filename
+chmod u+x "$filename"
+git add -A
+read -p "Enter commit message: " commit
+git commit -m "$commit"
+git push
+
