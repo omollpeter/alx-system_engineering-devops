@@ -4,5 +4,5 @@ chmod u+x "$filename"
 git add -A
 read -p "Enter commit message: " commit
 git commit -m "$commit"
-git push
+#git push
 
