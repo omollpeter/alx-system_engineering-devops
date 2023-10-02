@@ -1,2 +1,2 @@
 #!/bin/bash
-cat /etc/shadow /etc/hosts
+sudo cat /etc/shadow /etc/hosts
