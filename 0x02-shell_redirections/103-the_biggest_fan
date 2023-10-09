@@ -1,2 +1,2 @@
 #!/bin/bash
-sort | cut -f1 | uniq -c | sort -nr | head -n 11 | rev | cut -f1 -d " " | rev
+sort | tr '[:blank:]' ',' | cut -f1 -d, | uniq -c | sort -nr | rev | cut -f1 -d " " | rev | head -n 11
