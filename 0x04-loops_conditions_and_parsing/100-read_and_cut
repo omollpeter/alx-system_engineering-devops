@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# This script displays the content of the file /etc/passwd
+file="/etc/passwd"
+while IFS= read -r line || [ -n "$line" ]
+do
+    echo "$line" | cut -d: --complement -f2,4,5,7 --output-delimiter=":"
+done < "$file"
