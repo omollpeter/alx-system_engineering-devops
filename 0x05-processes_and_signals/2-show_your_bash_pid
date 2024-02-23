@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# This script displays the list of currently running bash processes
+# shellcheck disable=SC2009
+ps aux | grep bash
