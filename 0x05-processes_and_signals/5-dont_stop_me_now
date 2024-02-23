@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# This script kills a running process
+file="4-to_infinity_and_beyond"
+pid=$(pgrep -f "$file")
+kill "$pid"
