@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# This script kills a running process
+file="7-highlander"
+pkill -f "$file"

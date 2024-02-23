@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# This script displays the a text indefinitely and ignores SIGTERM
+trap 'echo "I am invincible!!!"' SIGTERM
+while (( 1 ))
+do
+    echo "To infinity and beyond"
+    sleep 2
+done
+trap - SIGTERM
