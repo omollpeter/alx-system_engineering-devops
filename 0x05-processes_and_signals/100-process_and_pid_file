@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# This script creates a file containing its pid and deletes the file on -TERM or -QUIT
+file="myscript.pid"
+folder="/var/run/"
+handle_sigterm()
+{
+    rm "$file"
+    exit 0
+}
+
+handle_sigquit()
+{
+    rm "$file"
+    exit 0
+}
+
+trap 'echo "Y U no love me?!"' SIGINT
+trap 'echo "I hate the kill command"; handle_sigterm' SIGTERM
+trap 'handle_sigquit' SIGQUIT
+
+pid=$$
+mkdir -p "$folder"
+echo "$pid" > "$folder/$file"
+while (( 1 ))
+do
+    echo "To infinity and beyond"
+done
+
+trap - SIGINT
+trap - SIGTERM
+trap - SIGQUIT
