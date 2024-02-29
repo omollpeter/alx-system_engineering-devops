@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# This script changes the IP address of localhost and facebook.com locally
+cp /etc/hosts ~/new_hosts_file
+tab="\t"
+sed -i 's/^.*localhost$/127.0.0.2\tlocalhost/' ~/new_hosts_file
+if grep -q facebook ~/new_hosts_file
+then
+    sed -i 's/^.*facebook.com$/8.8.8.8\tfacebook.com/' ~/new_hosts_file
+else
+    sed -i '/^172.*$/a\8.8.8.8\tfacebook.com' ~/new_hosts_file
+fi
+cp -f ~/new_hosts_file /etc/hosts
