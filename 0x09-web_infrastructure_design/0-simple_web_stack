@@ -1,0 +1,69 @@
+Simple web infrastructure
+
+Image link
+https://imgur.com/a/Bayhd7W
+
+
+What does it entail?
+At a minimum, it consists of a server, a web server, 
+an application server, a codebase, and a database
+
+To be able to understand what each component is and 
+its role in the setup, let’s take a scenario where a 
+user wants to access www.foobar.com over the internet.
+
+
+What is a server?
+A server is a computer system or software application 
+that provides services or resources to clients over a network. 
+It is a physical or virtual machine hosting the web infrastructure.
+Each server has an address(IP address) that is used to access it
+
+
+What is the role of the domain name?
+The domain name, foobar.com, serves as a human-readable alias for 
+the server’s IP address, e.g. 8.8.8.8. This makes it easier for users
+to access the website as it is easier to remember as compared to the actual address.
+
+
+What type of DNS record is www in www.foobar.com?
+Almost all domain names are prefixed with www. The www record is a 
+subdomain that typically points to the main domain name. It’s usually 
+configured as a CNAME(Canonical Name) record in the DNS.
+
+
+What is the role of the web server?
+The web server e.g. Nginx, Apache, handles incoming HTTP requests from 
+clients and serves static files or routes dynamic requests to the 
+application server for processing.
+
+
+What is the role of the application server?
+The application server executes the web application codebase, generates 
+dynamic content, and interacts with the database to retrieve or update 
+information as needed.
+
+
+What is the role of the database?
+The database e.g. MySQL, Postgresql, stores and manages structured data
+used by the web application. This allows for efficient storage, retrieval, 
+and manipulation of data required for the website’s functionality.
+
+
+What is the server using to communicate with the user’s computer requesting the website?
+The server communicates with the user’s computer over the HTTP protocol, 
+exchanging requests and responses containing web content.
+
+
+As simple as it may seem, there are limitations to this infrastructure:
+
+-> Single Point of Failure — Since we only have one server, it represents 
+a single point of failure. If the server goes down due to hardware failure 
+or system troubles, the entire website becomes inaccessible.
+
+-> Downtime during maintenance — During maintenance tasks such as deploying 
+new code or updating server configurations, the web server may need to be 
+restarted, resulting in temporary downtime for the website.
+
+-> Scalability limitations — With only one server, the infrastructure cannot 
+easily handle a significant increase in incoming traffic.
