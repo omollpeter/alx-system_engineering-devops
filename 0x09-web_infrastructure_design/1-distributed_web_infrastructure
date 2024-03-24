@@ -1,0 +1,63 @@
+Distributed web infrastructure
+
+Image link
+https://imgur.com/a/j8xIb05
+
+
+Brief description
+This is an improvement over the simple web stack. It has an additional 
+server and a load balancer.
+
+
+Why the extras?
+-> Extra server — Allows incoming traffic to be distributed.
+
+-> Load balancer — This is to distribute incoming traffic across multiple 
+servers for improved performance and availability.
+
+
+What distribution algorithm is configured for the load balancer and 
+how does it work?
+-> Round Robin algorithm — It works by sequentially forwarding incoming requests 
+to each server in turn, ensuring equal distribution of traffic.
+
+
+Is the load balancer enabling an Active-Active or Active-Passive setup? What’s the difference between both?
+-> Active-active setup. In an active-active setup, both the servers are actively 
+serving traffic and the load balancer distributes requests across them which 
+ensures high availability. On the other hand, in an active-passive setup, only 
+one server is actively serving traffic, while the other server remains on 
+standby. If the active server fails the passive server takes over.
+
+
+How does a database Primary-Replica (Master-Slave) cluster work?
+In a Primary-Replica cluster, the Primary node(Master) handles all write 
+operations (insert, update, delete) and replicates the changes to one or more 
+Replica nodes(Slaves). The Replica nodes serve read-only queries, improving read 
+scalability and providing fault tolerance.
+
+
+What is the difference between the Primary node and the Replica node in regard 
+to the application?
+-> The Primary node handles write operations and is responsible for maintaining the 
+authoritative copy of the data. The application interacts with the primary node 
+for its write operations.
+
+-> The Replica nodes replicate data from the Primary node and serve read-only 
+queries from the application. They provide additional capacity for handling read 
+traffic.
+
+
+Even with the improvements, this setup has some issues:
+
+-> Single Point of Failure — Since only a single load balancer is available, if 
+it fails, incoming traffic won’t be distributed properly.
+
+-> Security issues — There is no mention of firewalls or HTTPS, leaving the 
+infrastructure vulnerable to various threats, such as unauthorized access and 
+data interception.
+
+-> No monitoring — Without monitoring in place, it becomes difficult to detect 
+and troubleshoot issues such as performance bottlenecks, resource utilization, 
+and server failures in real-time.
+
