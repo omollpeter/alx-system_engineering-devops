@@ -1,0 +1,10 @@
+Scale up
+
+Image link
+https://imgur.com/a/w5EJC21
+
+
+The above illustration shows a far better improvement. It involves distributing 
+components (database, web server, and application server) for each server to 
+employ redundancy. It also has an additional load balancer to eliminate a single 
+point of failure at the load balancing level
