@@ -1,0 +1,65 @@
+ Secured and monitored web infrastructure
+
+Image link
+https://imgur.com/a/ClxSj7j
+
+
+The infrastructure setup is augmented with firewalls, SSL certification, and 
+monitoring clients.
+
+
+Why the extra resources?
+-> Firewalls — This is to control and secure network traffic, protecting the 
+servers from unauthorized access and potential security threats.
+
+-> SSL Certificate — This is to encrypt traffic between clients and servers, 
+ensuring data confidentiality and integrity.
+
+-> Monitoring clients — This is to collect performance metrics and monitor the 
+health and availability of the servers and services, enabling proactive 
+management and troubleshooting.
+
+What are firewalls for?
+Firewalls control and secure network traffic, protecting the servers from 
+unauthorized access and potential security threats.
+
+
+Why is the traffic served over HTTPS?
+HTTPS encrypts data transmitted between clients and servers, protecting 
+sensitive information such as login credentials, personal details, and financial 
+transactions from eavesdropping and tampering.
+
+
+What monitoring is used for?
+Monitoring is used to track the performance, availability, and health of the web 
+infrastructure and detect any anomalies that may arise.
+
+
+How is the monitoring tool collecting data?
+It collects data by deploying monitoring agents or clients on each server to 
+gather metrics, logs, and other relevant information. The data is then 
+aggregated to the monitoring dashboard.
+
+
+What should you do if you want to monitor your web server QPS?
+If you want to monitor the web server’s query per second (QPS), you can 
+configure the monitoring tool to collect metrics related to incoming HTTP 
+requests and response times.
+
+
+Again, this setup has some issues:
+
+-> SSL termination at the load balancer — This can expose decrypted traffic 
+within the internal network, potentially compromising data security. It is 
+recommended to terminate SSL at the web server level for end-to-end encryption.
+
+-> Only one MySQL server for write operations — This creates a single point of 
+failure which can result in data loss or service disruption. Clustering may 
+mitigate this risk.
+
+-> Having servers with all the same components — This may lead to a lack of 
+diversity in the infrastructure, making it vulnerable to common mode failures.
+It’s advisable to distribute components across different servers or employ 
+different servers or employ redundancy to enhance reliability and fault 
+tolerance.
+
