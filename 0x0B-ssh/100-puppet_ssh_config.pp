@@ -1,15 +1,14 @@
 # This manifest makes changes to SSH client configuration file
-exec { 'puppetlabs-ssh':
-    command => 'puppet module install puppetlabs-ssh'
-}
+class my_ssh_config {
+    include ssh::client
 
-class { 'ssh': }
+    file_line { 'PasswordAuthentication':
+        path    => '/etc/ssh/ssh_config',
+        value   => 'no',
+    }
 
-
-ssh::client::config { 'ssh_config':
-    ensure       => 'present',
-    options_hash => {
-        'IdentityFile'           => '~/.ssh/school',
-        'PasswordAuthentication' => 'no'
+    file_line { 'IdentityFile':
+        path    => '/etc/ssh/ssh_config',
+        value   => '~/.ssh/school'
     }
 }
