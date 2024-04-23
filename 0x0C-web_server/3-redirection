@@ -6,10 +6,11 @@ sudo apt install nginx -y
 
 echo "Hello World!" | sudo tee -a /var/www/html/index.html
 
-sudo sed -i.bak '/server_name _;/a \ \
-\
-        location \/redirect_me {\
-                rewrite ^\/redirect_me$ https:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4 permanent;\
-        }' /etc/nginx/sites-available/default
+if grep -q  "rewrite ^/redirect_me$ https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;" /etc/nginx/sites-available/default
+then
+    echo "Redirect present"
+else
+    sudo sed -i.bak '/server_name _;/a \        rewrite ^\/redirect_me$ https:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default
+fi
 
 sudo /etc/init.d/nginx restart
