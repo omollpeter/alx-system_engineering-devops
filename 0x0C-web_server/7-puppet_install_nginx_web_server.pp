@@ -58,7 +58,7 @@ server {
                 try_files $uri $uri/ =404;
         }
 
-        rewrite ^/redirect_me https://www.youtube.com/watch?v=nIb22KNpuM4 permanent;
+        rewrite ^/redirect_me$ https://www.youtube.com/watch?v=nIb22KNpuM4 permanent;
 }
         CONTENT
 }
