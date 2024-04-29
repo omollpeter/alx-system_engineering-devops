@@ -1,16 +1,15 @@
 #!/usr/bin/env bash
 # This script installs and configures HAProxy on a server
 # Installing HAProxy using a dedicated PPA
-sudo apt-get install --no-install-recommends software-properties-common -y
-sudo add-apt-repository ppa:vbernat/haproxy-2.8
-sudo apt-get update
-sudo apt-get install haproxy=2.8\* -y
+sudo apt update
+sudo apt install haproxy -y
 
 if grep -q "frontend my_frontend" /etc/haproxy/haproxy.cfg
 then
     :
 else
-    sudo sed -i '35a\frontend my_frontend\
+    sudo sed -i '$a\
+frontend my_frontend\
         bind *:80\
         default_backend my_backend\
 ' /etc/haproxy/haproxy.cfg
@@ -20,7 +19,7 @@ if grep -q "^backend my_backend" /etc/haproxy/haproxy.cfg
 then
     :
 else
-    sudo sed -i '39a\backend my_backend\
+    sudo sed -i '$a\backend my_backend\
         balance roundrobin\
         server server1 3.90.85.174:80 check\
         server server2 100.26.159.203:80 check\
