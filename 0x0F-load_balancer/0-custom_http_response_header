@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+# This script installs and configures nginx in a new Ubuntu server
+sudo apt update
+
+sudo apt install nginx -y
+
+echo "Hello World!" | sudo tee /var/www/html/index.html
+
+if grep -q  "rewrite ^/redirect_me$ https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;" /etc/nginx/sites-available/default
+then
+    echo "Redirect present"
+else
+    sudo sed -i '/server_name _;/a \        rewrite ^/redirect_me$ https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default
+fi
+
+echo "Ceci n'est pas une page" | sudo tee /usr/share/nginx/html/custom_404.html
+
+if grep -q "error_page 404 /custom_404.html" /etc/nginx/sites-available/default
+then
+    :
+else
+    sudo sed -i '/server_name _;/a \
+        error_page 404 /custom_404.html;\
+        location = /custom_404.html {\
+                root /usr/share/nginx/html;\
+                internal;\
+        }' /etc/nginx/sites-available/default
+fi    
+
+if grep -q "add_header X-Served-By" /etc/nginx/sites-available/default
+then
+    :
+else
+    sudo sed -i '/try_files $uri $uri\/ =404;/a \                add_header X-Served-By $HOSTNAME;' /etc/nginx/sites-available/default
+fi
+
+sudo /etc/init.d/nginx restart
