@@ -11,13 +11,6 @@ package { 'nginx':
         require => Exec['apt update']
 }
 
-# Ensure the nginx.service is enabled and running and can be restarted
-service { 'nginx':
-        ensure     => 'running',
-        enable     => true,
-        hasrestart => true,
-}
-
 # Check the document root
 file { '/var/www/html':
         ensure => 'directory',
@@ -34,6 +27,16 @@ file { '/var/www/html/index.html':
         mode    => '0644',
         content => @(CONTENT)
 Hello World!
+        CONTENT
+}
+
+file { '/usr/share/nginx/html/custom_404.html':
+        ensure  => present,
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0644',
+        content => @(CONTENT)
+Ceci n'est pas une page
         CONTENT
 }
 
@@ -54,6 +57,12 @@ server {
 
         server_name _;
 
+        error_page 404 /custom_404.html;
+        location = /custom_404.html {
+                root /usr/share/nginx/html;
+                internal;
+        }
+
         location / {
                 try_files $uri $uri/ =404;
                 add_header X-Served-By $HOSTNAME;
@@ -68,4 +77,11 @@ server {
 file { '/etc/nginx/sites-enabled/default':
         ensure => 'link',
         target => '/etc/nginx/sites-available/default'
+}
+
+# Ensure the nginx.service is enabled and running and can be restarted
+service { 'nginx':
+        ensure     => 'running',
+        enable     => true,
+        hasrestart => true,
 }
