@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# This script fixes nginx server issues in a server
+sudo apt update
+sudo apt install nginx -y
+sudo /etc/init.d/nginx start
