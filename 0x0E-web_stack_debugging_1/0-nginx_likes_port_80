@@ -2,5 +2,6 @@
 # This script fixes nginx server issues in a server
 sudo apt update
 sudo apt install nginx -y
-sudo sed -i 's/listen [0-9]\+/listen 80/' /etc/nginx/sites-available/default
-sudo /etc/init.d/nginx start
+sudo rm /etc/nginx/sites-enabled/default
+ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+service nginx restart
