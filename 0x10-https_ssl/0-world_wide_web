@@ -10,14 +10,14 @@ display_subd_info () {
         for domain in "${subdomains[@]}"
         do
             answer=$(dig "$domain"."$1" | awk ' NR==14 ')
-            record=$(echo "$answer" | awk -F"\t" '{print $4}')
-            ip=$(echo "$answer" | awk -F"\t" '{print $5}')
+            record=$(echo "$answer" | awk '{print $4}')
+            ip=$(echo "$answer" | awk '{print $5}')
             echo "The subdomain $domain is a $record record and points to $ip"
         done
     else
         answer=$(dig "$2"."$1" | awk ' NR==14 ')
-        record=$(echo "$answer" | awk -F"\t" '{print $4}')
-        ip=$(echo "$answer" | awk -F"\t" '{print $5}')
+        record=$(echo "$answer" | awk '{print $4}')
+        ip=$(echo "$answer" | awk '{print $5}')
         echo "The subdomain $2 is a $record record and points to $ip"
     fi  
 }
