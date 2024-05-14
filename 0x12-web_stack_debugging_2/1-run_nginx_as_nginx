@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# This scripts debugs nginx and ensures it runs as a nginx user
+pkill -f apache2
+sudo chown -R nginx:nginx /etc/nginx/nginx.conf
+sudo chmod -R 644 /etc/nginx/nginx.conf
+sudo sed -i 's/#user www-data;/user nginx;/' /etc/nginx/nginx.conf
+sudo sed -i 's/80/8080/g' /etc/nginx/sites-available/default
+su - nginx -c 'service nginx start'

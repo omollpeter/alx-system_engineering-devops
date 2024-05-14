@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 # This script runs whoami with the username passed as argument
 
-orig_user=$(whoami)
-
 if grep -q "$1" /etc/passwd
 then
     :
@@ -10,5 +8,4 @@ else
     useradd "$1"
 fi
 
-su "$1" -c 'whoami'
-su - "$orig_user"
+su - "$1" -c 'whoami'
