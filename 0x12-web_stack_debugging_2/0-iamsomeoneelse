@@ -1,11 +1,3 @@
 #!/usr/bin/env bash
 # This script runs whoami with the username passed as argument
-
-if grep -q "$1" /etc/passwd
-then
-    :
-else
-    useradd "$1"
-fi
-
 su - "$1" -c 'whoami'
