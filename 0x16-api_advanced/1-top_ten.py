@@ -22,6 +22,7 @@ def top_ten(subreddit):
     hot_topics = []
     for t in data.get("data").get("children"):
         hot_topics.append(t.get("data").get("title"))
+    print(len(hot_topics))
     i = 0
     for t in hot_topics:
         print(t)

@@ -2,16 +2,11 @@
 """
 1-main
 """
+import sys
 
-
-from datadog_api_client import ApiClient, Configuration
-from datadog_api_client.v1.api.hosts_api import HostsApi
-
-configuration = Configuration()
-with ApiClient(configuration) as api_client:
-    api_instance = HostsApi(api_client)
-    response = api_instance.list_hosts(
-        filter="env:ci",
-    )
-
-    print(response)
+if __name__ == '__main__':
+    top_ten = __import__('1-top_ten').top_ten
+    if len(sys.argv) < 2:
+        print("Please pass an argument for the subreddit to search.")
+    else:
+        top_ten(sys.argv[1])
