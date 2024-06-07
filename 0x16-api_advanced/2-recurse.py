@@ -8,7 +8,12 @@ hot articles from a particular subreddit
 import requests
 
 
-def recurse(subreddit, hot_list=[], after=None):
+def recurse(subreddit, hot_list=[]):
+    after = None
+    return recursive(subreddit, hot_list, after)
+
+
+def recursive(subreddit, hot_list=[], after=None):
     """
     Retrieves all the hot articles of a particular subreddit
     """
@@ -28,6 +33,6 @@ def recurse(subreddit, hot_list=[], after=None):
 
     after = data.get("data").get("after")
     if after:
-        recurse(subreddit, hot_list, after)
+        recursive(subreddit, hot_list, after)
 
     return hot_list
