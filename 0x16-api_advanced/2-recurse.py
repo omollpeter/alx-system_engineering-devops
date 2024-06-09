@@ -9,6 +9,9 @@ import requests
 
 
 def recurse(subreddit, hot_list=[]):
+    """
+    Make recursive calls to an API
+    """
     after = None
     return recursive(subreddit, hot_list, after)
 
