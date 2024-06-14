@@ -36,6 +36,9 @@ server {
         index index.html index.htm index.nginx-debian.html;
 
         server_name www.omollpeter.tech;
+
+        add_header X-Served-By $HOSTNAME;
+
         location /hbnb_static/ {
                 alias /data/web_static/current/;
         }
@@ -45,8 +48,11 @@ server {
         location / {
                 # First attempt to serve request as file, then
                 # as directory, then fall back to displaying a 404.
-                try_files $uri $uri/ =404;
-                add_header X-Served-By $HOSTNAME;
+                #try_files $uri $uri/ =404;
+                #add_header X-Served-By $HOSTNAME;
+                include proxy_params;
+                proxy_pass http://0.0.0.0:5003/2-hbnb;
+
         }
 
         location /airbnb-onepage {
